@@ -19,6 +19,30 @@ module RTeX
         options = {} if options.class != Hash        
         Document.new(orig, options.merge(:processed => true)).to_pdf do |f|
           serve_file = Tempfile.new('rtex-pdf')
+
+          if options[:user_pw].present? && options[:owner_pw].present?
+            pdf_path = File.dirname(f)
+            pdf_name = File.basename(f, '.pdf')
+            encrypted_filename = File.join(pdf_path, "#{pdf_name}_encrypted.pdf")
+            owner_pw = options[:owner_pw].is_a?(Proc)? options[:owner_pw].call : options[:owner_pw]
+            user_pw = options[:user_pw].is_a?(Proc)? options[:user_pw].call : options[:user_pw]
+
+            pdftk_commands = [
+              f,
+              'output', encrypted_filename,
+              'owner_pw', owner_pw,
+              'user_pw', user_pw
+            ]
+
+            unless options[:disallow_printing]
+              pdftk_commands << 'allow'
+              pdftk_commands << 'printing'
+            end
+
+            PDF::Toolkit.pdftk(*pdftk_commands)
+            f = encrypted_filename
+          end
+
           FileUtils.mv f, serve_file.path
           send_file serve_file.path,
             :disposition => (options[:disposition] rescue nil) || 'inline',
