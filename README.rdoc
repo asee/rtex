@@ -1,10 +1,14 @@
-(Please note that this project is no longer maintained at http://github.com/bruce/rtex.  Please use/maintain one of the forks!)
+== Changes from the original
+* Upgraded for rails 3/4 integration, removed merb and standalone support
+* Optionaly setting a password on generated PDFs using the pdf-toolkit gem
+* Writes last generated intermediate latex document to tmp/last_document.latex in development mode
+* Considers all latex escaped text html_safe
 
 = RTeX: TeX/PDF Generation for Ruby
 
 Project homepage (FAQ, manual, documentation, contact info): http://rtex.rubyforge.org
 
-Source repository at: http://github.com/bruce/rtex
+Original source repository at: http://github.com/bruce/rtex
 
 == Dependencies
 
