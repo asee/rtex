@@ -6,7 +6,7 @@ module RTeX
     def escape(text)
       replacements.inject(text.to_s) do |corpus, (pattern, replacement)|
         corpus.gsub(pattern, replacement)
-      end
+      end.html_safe
     end
     
     # List of replacements
