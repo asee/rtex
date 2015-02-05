@@ -14,6 +14,7 @@ module RTeX
 
     def render_with_rtex(options = nil, *args, &block)
       orig = render_without_rtex(options, *args, &block)
+      File.open(Rails.root.join("tmp","last_document.latex"), "w"){|f| f.puts orig} if Rails.env.development?
       if Thread.current[:_rendering_rtex] == true
         Thread.current[:_rendering_rtex] = false
         options = {} if options.class != Hash        
