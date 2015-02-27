@@ -10,6 +10,7 @@ module RTeX
     end
 
     def simple_format(text)
+      text=escape(text)
       text.gsub(/([\n])/, '\newline{}').html_safe
     end
     
