@@ -10,6 +10,13 @@ module RTeX
         localize(*args)
       end
     end
+
+    def latex_simple_format(*args)
+      RTeX::Document.simple_format(*args)
+    end
+
     alias :l :latex_escape
+    alias :sf :latex_simple_format
+
   end
 end

@@ -8,6 +8,10 @@ module RTeX
         corpus.gsub(pattern, replacement)
       end.html_safe
     end
+
+    def simple_format(text)
+      text.gsub(/([\n])/, '\newline{}').html_safe
+    end
     
     # List of replacements
     def replacements
