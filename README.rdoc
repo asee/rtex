@@ -3,6 +3,7 @@
 * Optionaly setting a password on generated PDFs using the pdf-toolkit gem
 * Writes last generated intermediate latex document to tmp/last_document.latex in development mode
 * Considers all latex escaped text html_safe
+* latex_simple_format method added so that new lines can be rendered properly in latex.
 
 = RTeX: TeX/PDF Generation for Ruby
 
