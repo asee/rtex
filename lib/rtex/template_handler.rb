@@ -40,6 +40,11 @@ module RTeX
               pdftk_commands << 'printing'
             end
 
+            unless options[:disallow_screenreaders]
+              pdftk_commands << 'allow'
+              pdftk_commands << 'screenreaders'
+            end
+
             PDF::Toolkit.pdftk(*pdftk_commands)
             f = encrypted_filename
           end
